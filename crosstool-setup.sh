@@ -38,8 +38,8 @@ function install_crosstool()
 
 install_crosstool
 if [ $? -eq 0 ]; then
-	echo "Crosstool-NG installation completed under directory: $EMBED_DEV_DIR."
-	echo "Path to executable: $EMBED_DEV_DIR/bin/ct-ng"
+	echo "Crosstool-NG installation completed under directory: $EMBED_DEV_DIR/crosstool-ng"
+	echo "Path to executable: $EMBED_DEV_DIR/crosstool-ng/bin/ct-ng"
 else
 	echo "Crosstool-NG installation failed. Check the output above for the details."
 fi
