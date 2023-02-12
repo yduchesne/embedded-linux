@@ -71,21 +71,49 @@ function print_info()
 # Crosstool-NG functions
 # ======================
 
+function ct_build()
+{
+	"$PWD/ct-build.sh"
+}
+
 function ct_clean()
 {
 	clean_dir "$CROSSTOOL_DEV_DIR"
 }
 
+# U-Boot functions
+# ================
+
+function uboot_build()
+{
+	"$PWD/uboot-build.sh"
+}
+
+function uboot_clean()
+{
+	clean_dir "$UBOOT_DEV_DIR"
+}
+
 # Kernel functions
 # ================
 
+function kernel_build()
+{
+	"$PWD/kernel-build.sh"
+}
+
 function kernel_clean()
 {
-	clean_dir  "$KERNEL_DEV_DIR"
+	clean_dir "$KERNEL_DEV_DIR"
 }
 
 # RootFS functions
 # ================
+
+function rootfs_build()
+{
+	"$PWD/rootfs-build.sh"
+}
 
 function rootfs_clean()
 {
@@ -101,6 +129,12 @@ function rootfs_clean()
 
 # BusyBox functions
 # =================
+
+function bbox_build()
+{
+	"$PWD/bbox-build.sh"
+}
+
 function bbox_clean()
 {
 	clean_dir "$BBOX_DEV_DIR"

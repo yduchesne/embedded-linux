@@ -17,7 +17,7 @@ else
 	cd "$BBOX_DEV_DIR" && \
 	echo "Checking out version $BBOX_VERSION..." && \
 	git checkout "$BBOX_VERSION" && \
-	echo "Running bootstrap => make..." && \
+	echo "Running make..." && \
 	make distclean && \
 	make defconfig && \
 	make menuconfig && \

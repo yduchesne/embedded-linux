@@ -9,7 +9,7 @@ cd "$EMBED_DEV_DIR" || (echo "Could not switch to directory $EMBED_DEV_DIR. Abor
 
 echo "Installing required packages..."
 sudo apt update && \
-sudo apt install -y git autoconf gperf bison flex texinfo help2man gawk libtool-bin ncurses-dev && i\
+sudo apt install -y git autoconf gperf bison flex texinfo help2man gawk libtool-bin ncurses-dev libssl-dev && i\
 echo "Cloning Crosstool-NG Git repo..." && \
 git clone $CROSSTOOL_GIT_URL && \
 cd crosstool-ng/ && \

@@ -22,6 +22,12 @@ export XTOOLS_ARCH="arm"
 export XTOOLS_DEF_CONFIG="multi_v7_defconfig"
 export PATH="$PATH:$XTOOLS_DIR/$XTOOLS_TARGET_NAME/bin"
 
+# Uboot
+export UBOOT_DEV_DIR="$EMBED_DEV_DIR/u-boot"
+export UBOOT_GIT_URL="https://github.com/u-boot/u-boot.git"
+export UBOOT_VERSION="v2023.01"
+export UBOOT_DEF_CONFIG="am335x_evm_defconfig"
+
 # Kernel
 export KERNEL_MAJOR_VERSION="5"
 export KERNEL_FULL_VERSION="5.4.231"

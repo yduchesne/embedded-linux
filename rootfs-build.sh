@@ -37,14 +37,14 @@ fi
 
 echo "Mounting proc and sysfs under $ROOTFS_DEV_DIR"
 if ! [ -e "$ROOTFS_DEV_DIR/proc" ]; then
-        sudo mount -t proc proc ./proc
+        sudo mount -t proc proc /proc
 	assert_ok "Could not mount proc under $ROOT_FS_DEV_DIR. Aborting."
 else 
         echo "  proc already exists under $ROOTFS_DEV_DIR. Skipping."
 fi
 
 if ! [ -e "$ROOTFS_DEV_DIR/sys" ]; then
-        sudo mount -t sysfs sysfs ./sys
+        sudo mount -t sysfs sysfs /sys
 	assert_ok "Could not mount sys under $ROOT_FS_DEV_DIR. Aborting."
 else 
         echo "  sys already exists under $ROOTFS_DEV_DIR. Skipping."

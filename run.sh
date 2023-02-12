@@ -17,8 +17,14 @@ if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help
 	echo "  Crosstool-NG"
 	echo "  ------------"
     echo "  ct-build.......: Builds Crosstool-NG from source (the Git repo is cloned"
-	echo "                   under $CROSSTOOL_DEV_DIR)."
+	echo "                   under $EMBED_DEV_DIR)."
 	echo "  ct-clean.......: Deletes the $CROSSTOOL_DEV_DIR directory"
+	echo "                   and sub-directories."	echo ""
+	echo "  U-Boot"
+	echo "  ------"
+	echo "  uboot-build....: Builds U-Boot from source (the Git repo is cloned"
+	echo "                   under $EMBED_DEV_DIR)."
+	echo "  uboot-clean....: Deletes the $UBOOT_DEV_DIR directory"
 	echo "                   and sub-directories."
 	echo ""
 	echo "  Kernel"
@@ -39,7 +45,7 @@ if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help
 	echo "  BusyBox"
 	echo "  -------"
 	echo "  bbox-build.....: Builds BusyBox from source ( the Git repo is cloned"
-	echo "                   under $BBOX_DEV_DIR."
+	echo "                   under $EMBED_DEV_DIR)."
 	echo "                   Note: the BusyBox build is automatically triggered by the"
 	echo "                         rootfs-build command, if needed. Calling this command"
 	echo "                         separately is necessary only if one desires to build"
@@ -49,32 +55,41 @@ if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help
 	echo ""
 elif [ "$1" == "info" ] || [ "$1" == "-v" ]; then
         print_info
+elif [ "$1" == "build" ]; then
+	ct_build
+	uboot_build
+	kernel_build
+	rootfs_build
 elif [ "$1" == "clean" ]; then
 	clean_all
 
 # Crosstool-NG
 elif [ "$1" == "ct-build" ]; then
-	"$PWD/ct-build.sh"
+	ct_build
 elif [ "$1" == "ct-clean" ]; then
 	ct_clean
 
+# Uboot
+elif [ "$1" == "uboot-build" ]; then
+	uboot_build
+elif [ "$1" == "uboot-clean" ]; then
+	uboot_clean
+
 # Kernel
 elif [ "$1" == "kernel-build" ]; then
-	"$PWD/kernel-build.sh"
-
+	kernel_build
 elif [ "$1" == "kernel-clean" ]; then
 	kernel_clean
 
 # RootFS
 elif [ "$1" == "rootfs-build" ]; then
-	"$PWD/rootfs-build.sh"
-
+	rootfs_build
 elif [ "$1" == "rootfs-clean" ]; then
 	rootfs_clean
 
 # BusyBox
 elif [ "$1" == "bbox-build" ]; then
-	"$PWD/bbox-build.sh"
+	bbox_build
 elif [ "$1" == "bbox-clean" ]; then
 	bbox_clean
 else
