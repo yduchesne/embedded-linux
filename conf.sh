@@ -3,7 +3,7 @@
 # Directory for checking out sources, downloading tarballs, etc.
 # It is the parent directory for the CT NG and Kernel sources
 # as well as build artifacts.
-export EMBED_DEV_DIR="$HOME/embedded-linux-tools"
+export EMBED_DEV_DIR="$HOME/embedded-linux-build"
 
 # Crosstool-NG
 export CROSSTOOL_DEV_DIR="$EMBED_DEV_DIR/crosstool-ng"
