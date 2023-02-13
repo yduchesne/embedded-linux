@@ -27,5 +27,5 @@ else
 	assert_ok "BusyBox build failed. Check the output above for the details."
 	echo "BusyBox build completed."
 
-	cd "$OLDPWD" || echo "Could not switch back to $OLDPWD directory. Current directory is: $EMBED_DEV_DIR."
+	cd_back
 fi

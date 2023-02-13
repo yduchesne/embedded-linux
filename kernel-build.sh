@@ -43,5 +43,4 @@ assert_ok "Error buiding kernel. Check the output above for the details."
 
 echo "Finished building kernel under $KERNEL_SRC_DIR"
 
-cd "$OLDPWD" || echo "Could not switch back to $OLDPWD directory. Current directory is: $EMBED_DEV_DIR."
-
+cd_back

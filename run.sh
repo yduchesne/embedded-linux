@@ -1,6 +1,8 @@
 #!/bin/bash
 
 source "$PWD/common.sh" || (echo "Could not load environment variables and common functions. Aborting." && exit 1)
+source "$PWD/sd-functions.sh" || (echo "Could not load SD card-related functions. Aborting." && exit 1)
+source "$PWD/rootfs-functions.sh" || (echo "Could not load RootFS-related functions. Aborting." && exit 1)
 
 if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help" ]; then
 	echo "Synopsis: $0 <command> <args>"
@@ -86,14 +88,27 @@ elif [ "$1" == "rootfs-build" ]; then
 	rootfs_build
 elif [ "$1" == "rootfs-clean" ]; then
 	rootfs_clean
+elif [ "$1" == "rootfs-create-initramfs" ]; then
+	rootfs_create_initramfs
 
 # BusyBox
 elif [ "$1" == "bbox-build" ]; then
 	bbox_build
 elif [ "$1" == "bbox-clean" ]; then
 	bbox_clean
+
+# SD Card
+elif [ "$1" == "sd-copy-uboot" ]; then
+	sd_copy_uboot
+elif [ "$1" == "sd-copy-fsramdisk" ]; then
+	sd_copy_fsramdisk
+elif [ "$1" == "sd-copy-kernel" ]; then
+	sd_copy_kernel
+elif [ "$1" == "sd-unmount" ]; then
+	sd_unmount
+
+# Catch-all
 else
 	echo "Unknown command: $1"
 	exit 1
 fi
-

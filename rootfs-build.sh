@@ -52,4 +52,4 @@ fi
 
 echo "Finished creating RootFS under $ROOTFS_DEV_DIR"
 
-cd "$OLDPWD" || echo "Could not switch back to $OLDPWD directory. Current directory is: $EMBED_DEV_DIR."
+cd_back

@@ -9,15 +9,19 @@ function assert_ok()
 {
   if [ $? -ne 0 ]; then
         echo "$1"
-	cd "$OLD_PWD" || (echo "Could not switch to $OLD_PWD directory. Aborting." && exit 1)
-	exit $?
+		cd "$OLD_PWD" || (echo "Could not switch to $OLD_PWD directory. Aborting." && exit 1)
+		exit 1
   fi
 }
 
 function assert_file_exists()
 {
 	ls "$1"> /dev/null
-	assert_ok "Directory does not exist: $1"
+	if ! [ "$2" == "" ]; then
+		assert_ok "File or directory does not exist: $1. $2"
+	else
+		assert_ok "File or directory does not exist: $1"
+	fi
 }
 
 function clean_dir()
@@ -45,6 +49,11 @@ function mk_dir()
 function mk_dev_dir()
 {
 	mk_dir "$EMBED_DEV_DIR"
+}
+
+function cd_back()
+{
+	cd "$OLDPWD" || ( echo "Could not switch back to $OLDPWD directory. Current directory is: $PWD." && exit 1 )
 }
 
 function print_info()
