@@ -54,7 +54,7 @@ export ROOTFS_DEV_DIR="$EMBED_DEV_DIR/rootfs"
 
 # BusyBox
 export BBOX_DEV_DIR="$EMBED_DEV_DIR/busybox"
-export BBOX_VERSION="1_31_1"
+export BBOX_VERSION="1_36_0"
 export BBOX_GIT_URL="git://busybox.net/busybox.git"
 
 # SD Card
