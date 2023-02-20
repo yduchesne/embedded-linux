@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$PWD/common.sh" || (echo "U-Boot build failed. Could not load environment variables and common scripts." && exit 1)
+source $WORK_DIR/common.sh || (echo "U-Boot build  failed. Could not load environment variables and common functions." && exit 1)
 
 if [ -f "$UBOOT_DEV_DIR/u-boot" ]; then
 	echo "U-Boot binaries already present under $UBOOT_DEV_DIR. Skipping build."

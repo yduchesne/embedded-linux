@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$PWD/common.sh" || (echo "RootFS build failed. Could not load environment variables and common functions." && exit 1)
+source $WORK_DIR/common.sh || (echo "RootFS build  failed. Could not load environment variables and common functions." && exit 1)
 
 echo "Work directory set to: $EMBED_DEV_DIR."
 mk_dir "$ROOTFS_DEV_DIR"
@@ -13,7 +13,7 @@ do
 done
 
 echo "Triggering BusyBox build"
-"$PWD/bbox-build.sh"
+"$WORK_DIR/bbox/bbox-build.sh"
 
 echo "Copying libraries from $XTOOLS_SYSROOT_DIR/lib to $ROOTFS_DEV_DIR/lib"
 cp $XTOOLS_SYSROOT_DIR/lib/*.so* "$ROOTFS_DEV_DIR/lib"

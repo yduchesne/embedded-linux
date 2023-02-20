@@ -22,19 +22,39 @@ sd_copy_kernel()
     assert_file_exists "$KERNEL_SRC_DIR/arch/arm/boot/zImage" "Has the kernel been compiled? Check the kernel-build command."
     assert_file_exists "$KERNEL_SRC_DIR/arch/arm/boot/dts/$KERNEL_DTB_NAME" "Has the kernel been compiled? Check the kernel-build command."
     assert_file_exists "/media/$USER/boot" "Is the SD card inserted? Has it been formatted? Check the sd-format command."
-
+    
     cp "$KERNEL_SRC_DIR/arch/arm/boot/zImage" "/media/$USER/boot"
     assert_ok "Could not copy $KERNEL_SRC_DIR/arch/arm/boot/zImage to /media/$USER/boot"
     cp "$KERNEL_SRC_DIR/arch/arm/boot/dts/$KERNEL_DTB_NAME" "/media/$USER/boot"
     assert_ok "Could not copy $KERNEL_SRC_DIR/arch/arm/boot/dts/$KERNEL_DTB_NAME to /media/$USER/boot"
 }
 
-sd_unmount()
+sd_copy_all()
+{
+    sd_copy_fsramdisk
+    sd_copy_uboot
+    sd_copy_kernel
+}
+
+sd_format()
+{
+    WORK_DIR="$WORK_DIR" "$WORK_DIR/sd/sd-format.sh" "$SD_DRIVE"
+}
+
+
+sd_umount()
 {
     if [ -e "/media/$USER/boot" ]; then
-        sudo unmount "/media/$USER/boot"
+        sudo umount "/media/$USER/boot"
     fi
     if [ -e "/media/$USER/rootfs" ]; then
-        sudo unmount "/media/$USER/rootfs"
-    fi    
+        sudo umount "/media/$USER/rootfs"
+    fi
+}
+
+sd_help()
+{
+    echo "SD Card Module Help"
+    echo "------------------"
+    echo "... TBD ..."
 }

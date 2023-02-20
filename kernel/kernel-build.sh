@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source $PWD/common.sh || (echo "Kernel build  failed. Could not load environment variables and common functions." && exit 1)
+source $WORK_DIR/common.sh || (echo "Kernel build  failed. Could not load environment variables and common functions." && exit 1)
 
 echo "Work directory set to: $EMBED_DEV_DIR (Kernel sources and artifacts will be downloaded/built under $KERNEL_DEV_DIR)."
 mk_dev_dir

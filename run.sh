@@ -1,8 +1,13 @@
 #!/bin/bash
 
 source "$PWD/common.sh" || (echo "Could not load environment variables and common functions. Aborting." && exit 1)
-source "$PWD/sd-functions.sh" || (echo "Could not load SD card-related functions. Aborting." && exit 1)
-source "$PWD/rootfs-functions.sh" || (echo "Could not load RootFS-related functions. Aborting." && exit 1)
+
+load_module bbox "BusyBox"
+load_module ct "Crosstool NG"
+load_module kernel "Kernel"
+load_module rootfs "RootFS"
+load_module sd "SD Card"
+load_module uboot "U-Boot"
 
 if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help" ]; then
 	echo "Synopsis: $0 <command> <args>"
@@ -10,50 +15,17 @@ if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help
 	echo "Commands:"
 	echo "========="
 	echo ""
-	echo "  General"
-	echo "  -------"
-	echo "  info...........: Displays environment info."
-	echo "  clean..........: Deletes the $EMBED_DEV_DIR directory"
-	echo "                   and sub-directories."
-	echo ""
-	echo "  Crosstool-NG"
-	echo "  ------------"
-    echo "  ct-build.......: Builds Crosstool-NG from source (the Git repo is cloned"
-	echo "                   under $EMBED_DEV_DIR)."
-	echo "  ct-clean.......: Deletes the $CROSSTOOL_DEV_DIR directory"
-	echo "                   and sub-directories."	echo ""
-	echo "  U-Boot"
-	echo "  ------"
-	echo "  uboot-build....: Builds U-Boot from source (the Git repo is cloned"
-	echo "                   under $EMBED_DEV_DIR)."
-	echo "  uboot-clean....: Deletes the $UBOOT_DEV_DIR directory"
-	echo "                   and sub-directories."
-	echo ""
-	echo "  Kernel"
-	echo "  ------"
-	echo "  kernel-build...: Builds the kernel from source (the sources are downloaded"
-	echo "                   and untarred under $KERNEL_DEV_DIR)."
-	echo "  kernel-clean...: Deletes the $KERNEL_DEV_DIR directory"
-	echo "                   and sub-directories."
-	echo ""
-	echo "  RootFS"
-	echo "  ------"
-	echo "  rootfs-build...: Builds the root file system under $ROOTFS_DEV_DIR."
-	echo "                   Note: this command triggers the BusyBox build, if needed."
-	echo "                         BusyBox can also be built separately (see bbox-build command)."
-	echo "  rootfs-clean...: Deletes the $ROOTFS_DEV_DIR directory"
-	echo "                   and sub-directories."
-	echo ""
-	echo "  BusyBox"
-	echo "  -------"
-	echo "  bbox-build.....: Builds BusyBox from source ( the Git repo is cloned"
-	echo "                   under $EMBED_DEV_DIR)."
-	echo "                   Note: the BusyBox build is automatically triggered by the"
-	echo "                         rootfs-build command, if needed. Calling this command"
-	echo "                         separately is necessary only if one desires to build"
-	echo "                         BusyBox independently."
-	echo "  bbox-clean.....: Deletes the $BBOX_DEV_DIR directory"
-	echo "                   and sub-directories."
+	echo "info....: Displays environment info."
+	echo "build...: Launches the build for all modules, in the"
+	echo "          relevant order. Output will be generated"
+	echo "          under $EMBDED_DEV_DIR directory."
+	echo "clean...: Deletes the $EMBED_DEV_DIR directory"
+	echo "          and sub-directories."
+	echo "help....: Displays this help. To obtain the help for"
+	echo "          a specific module, type: <module_prefix>-help."
+	echo "          Examples:"
+	echo "            ct-help"
+	echo "            kernel-help"
 	echo ""
 elif [ "$1" == "info" ] || [ "$1" == "-v" ]; then
         print_info
@@ -64,51 +36,8 @@ elif [ "$1" == "build" ]; then
 	rootfs_build
 elif [ "$1" == "clean" ]; then
 	clean_all
-
-# Crosstool-NG
-elif [ "$1" == "ct-build" ]; then
-	ct_build
-elif [ "$1" == "ct-clean" ]; then
-	ct_clean
-
-# Uboot
-elif [ "$1" == "uboot-build" ]; then
-	uboot_build
-elif [ "$1" == "uboot-clean" ]; then
-	uboot_clean
-
-# Kernel
-elif [ "$1" == "kernel-build" ]; then
-	kernel_build
-elif [ "$1" == "kernel-clean" ]; then
-	kernel_clean
-
-# RootFS
-elif [ "$1" == "rootfs-build" ]; then
-	rootfs_build
-elif [ "$1" == "rootfs-clean" ]; then
-	rootfs_clean
-elif [ "$1" == "rootfs-create-initramfs" ]; then
-	rootfs_create_initramfs
-
-# BusyBox
-elif [ "$1" == "bbox-build" ]; then
-	bbox_build
-elif [ "$1" == "bbox-clean" ]; then
-	bbox_clean
-
-# SD Card
-elif [ "$1" == "sd-copy-uboot" ]; then
-	sd_copy_uboot
-elif [ "$1" == "sd-copy-fsramdisk" ]; then
-	sd_copy_fsramdisk
-elif [ "$1" == "sd-copy-kernel" ]; then
-	sd_copy_kernel
-elif [ "$1" == "sd-unmount" ]; then
-	sd_unmount
-
-# Catch-all
 else
-	echo "Unknown command: $1"
-	exit 1
+	command=$(echo "$1" | tr '-' '_')
+	$command
+	assert_ok "Execution failed for command: $1. Is it a valid command? You nay type '$0 -help' for help."
 fi

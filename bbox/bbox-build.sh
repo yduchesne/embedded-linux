@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "$PWD/common.sh" || (echo "BusyBox build failed. Could not load environment variables and common scripts." && exit 1)
+source $WORK_DIR/common.sh || (echo "BusyBox build  failed. Could not load environment variables and common functions." && exit 1)
 
 if [ -f "$ROOTFS_DEV_DIR/bin/busybox" ]; then
 	echo "BusyBox binary already present under $ROOTFS_DEV_DIR. Skipping build."

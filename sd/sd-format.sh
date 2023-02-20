@@ -4,9 +4,9 @@
 # Copyright (c) Chris Simmonds, 2017
 
 if [ $# -ne 1 ]; then
-        echo "Usage: $0 [drive]"
-        echo "       drive is 'sdb', 'mmcblk0', etc"
-        exit 1
+    echo "Usage: $0 [drive]"
+    echo "       drive is 'sdb', 'mmcblk0', etc"
+    exit 1
 fi
 
 function version_gt() { test "$(echo "$@" | tr " " "\n" | sort -V | head -n 1)" != "$1"; }
@@ -15,15 +15,17 @@ DRIVE=$1
 
 # Check the drive exists in /sys/block
 if [ ! -e /sys/block/${DRIVE}/size ]; then
-	echo "Drive does not exist"
-	exit 1
+    echo "Drive does not exist"
+    exit 1
 fi
 
 # Check it is a flash drive (size <= 64GiB)
 NUM_SECTORS=`cat /sys/block/${DRIVE}/size`
-if [ $NUM_SECTORS -eq 0 -o $NUM_SECTORS -gt 124000000 ]; then
-	echo "/dev/$DRIVE does not look like an SD card, bailing out"
-	exit 1
+#249670656
+#250000000
+if [ $NUM_SECTORS -eq 0 -o $NUM_SECTORS -gt 250000000 ]; then
+    echo "/dev/$DRIVE does not look like an SD card, bailing out"
+    exit 1
 fi
 
 # Unmount any partitions that have been automounted
