@@ -70,7 +70,8 @@ if [ $? -ne 0 ]; then echo "Error: mkfs.vfat"; exit 1; fi
 echo "Formatting partition $ROOT_PART with ext4"
 sudo mkfs.ext4 -L rootfs ${ROOT_PART}
 if [ $? -ne 0 ]; then echo "Error: mkfs.ext4"; exit 1; fi
-
+sudo mlabel -i "$BOOT_PART" ::"$BOOT_PART_LABEL"
+sudo e2label "$ROOT_PART" "$ROOT_PART_LABEL"
 echo "SUCCESS! Your microSD card has been formatted"
 exit 0
 

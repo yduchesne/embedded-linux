@@ -8,6 +8,7 @@ load_module kernel "Kernel"
 load_module rootfs "RootFS"
 load_module sd "SD Card"
 load_module uboot "U-Boot"
+load_module yocto "Yocto"
 
 if [ "$1" == "" ] || [ "$1" == "-h" ] || [ "$1" == "help" ] || [ "$1" == "--help" ]; then
 	echo "Synopsis: $0 <command> <args>"

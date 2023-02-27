@@ -58,15 +58,23 @@ export BBOX_VERSION="1_36_0"
 export BBOX_GIT_URL="git://busybox.net/busybox.git"
 
 # SD Card
+export SD_BOOT_PART_LABEL="BOOT"
+export SD_ROOT_PART_LABEL="ROOT"
 export SD_DRIVE="sdb"
 
 # Yocto
-
 YOCTO_DEV_DIR="$EMBED_DEV_DIR/yocto"
 YOCTO_CLONE_DIR="$YOCTO_DEV_DIR/poky"
 YOCTO_GIT_URL="git://git.yoctoproject.org/poky"
 YOCTO_GIT_BRANCH="langdale"
-YOCTO_BUILD_DIR="$YOCTO_CLONE_DIR/build"
+
+YOCTO_TARGET_NAME="beaglebone-yocto"
+YOCTO_BUILD_NAME="bbb"
+YOCTO_BUILD_TYPE="core-image-minimal"
+YOCTO_BUILD_DIR="$YOCTO_DEV_DIR/$YOCTO_BUILD_NAME"
+YOCTO_IMAGE_DIR="$YOCTO_BUILD_DIR/tmp/deploy/images/$YOCTO_TARGET_NAME"
+# e.g.: core-image-minimal-beaglebone-yocto.tar.bz2
+YOCTO_ROOTFS_ARCHIVE_NAME="$YOCTO_BUILD_TYPE-$YOCTO_TARGET_NAME.tar.bz2"
 
 YOCTO_OPEN_EMBED_DEV_DIR="$YOCTO_DEV_DIR/meta-openembedded"
 YOCTO_OPEN_EMBED_GIT_URL="git://git.openembedded.org/meta-openembedded"
@@ -75,6 +83,5 @@ YOCTO_OPEN_EMBED_GIT_BRANCH="$YOCTO_GIT_BRANCH"
 YOCTO_BBB_DEV_DIR="$YOCTO_DEV_DIR/meta-beagleboard"
 YOCTO_BBB_GIT_URL="git://github.com/beagleboard/meta-beagleboard"
 YOCTO_BBB_GIT_BRANCH="$YOCTO_GIT_BRANCH"
-
 
 

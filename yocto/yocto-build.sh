@@ -32,8 +32,8 @@ fi
 
 cd "$YOCTO_CLONE_DIR"
 
-if ! [ -d "$YOKTO_BUILD_DIR" ]; then
-	source oe-init-build-env
+if ! [ -d "$YOCTO_BUILD_DIR" ]; then
+	source oe-init-build-env "$YOCTO_BUILD_NAME"
 	assert_file_exists "$YOCTO_BUILD_DIR" "Directory not created as expected: $YOCTO_BUILD_DIR. Aborting."
 fi
 

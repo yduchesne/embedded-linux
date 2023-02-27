@@ -38,17 +38,17 @@ sd_copy_all()
 
 sd_format()
 {
-    WORK_DIR="$WORK_DIR" "$WORK_DIR/sd/sd-format.sh" "$SD_DRIVE"
+    WORK_DIR="$WORK_DIR" BOOT_PART_LABEL="$SD_BOOT_PART_LABEL" ROOT_PART_LABEL="$SD_ROOT_PART_LABEL" "$WORK_DIR/sd/sd-format.sh" "$SD_DRIVE"
 }
 
 
 sd_umount()
 {
-    if [ -e "/media/$USER/boot" ]; then
-        sudo umount "/media/$USER/boot"
+    if [ -e "/media/$USER/$SD_BOOT_PART_LABEL" ]; then
+        sudo umount "/media/$USER/$SD_BOOT_PART_LABEL"
     fi
-    if [ -e "/media/$USER/rootfs" ]; then
-        sudo umount "/media/$USER/rootfs"
+    if [ -e "/media/$USER/$SD_ROOT_PART_LABEL" ]; then
+        sudo umount "/media/$USER/$SD_ROOT_PART_LABEL"
     fi
 }
 
