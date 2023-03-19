@@ -84,4 +84,4 @@ YOCTO_BBB_DEV_DIR="$YOCTO_DEV_DIR/meta-beagleboard"
 YOCTO_BBB_GIT_URL="git://github.com/beagleboard/meta-beagleboard"
 YOCTO_BBB_GIT_BRANCH="$YOCTO_GIT_BRANCH"
 
-
+YOCTO_CUSTOM_LAYERS_DIR="$YOCTO_DEV_DIR/custom-layers"
