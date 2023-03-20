@@ -76,6 +76,8 @@ YOCTO_IMAGE_DIR="$YOCTO_BUILD_DIR/tmp/deploy/images/$YOCTO_TARGET_NAME"
 # e.g.: core-image-minimal-beaglebone-yocto.tar.bz2
 YOCTO_ROOTFS_ARCHIVE_NAME="$YOCTO_BUILD_TYPE-$YOCTO_TARGET_NAME.tar.bz2"
 
+YOCTO_WIC_IMAGE_NAME="core-image-minimal-beaglebone-yocto.wic"
+
 YOCTO_OPEN_EMBED_DEV_DIR="$YOCTO_DEV_DIR/meta-openembedded"
 YOCTO_OPEN_EMBED_GIT_URL="git://git.openembedded.org/meta-openembedded"
 YOCTO_OPEN_EMBED_GIT_BRANCH="$YOCTO_GIT_BRANCH"
